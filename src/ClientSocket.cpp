@@ -18,9 +18,9 @@ ClientSocket::ClientSocket(){
 
 void ClientSocket::connect_to_server(ServerSocket *server_socket){
 
-    int client_sockfd =  socket(inet_addr("127.0.0.1"), SOCK_STREAM, 0);
+    int client_sockfd =  socket(this->client_addr.sin_family, SOCK_STREAM, 0);
 
-    if(connect(client_sockfd, (sockaddr*)&server_socket->get_server_addr(), 100) < 0)
+    if(connect(client_sockfd, (sockaddr*)&server_socket->get_server_addr(), sizeof(sockaddr_in)) < 0)
         std::cout << "Connection failed";
 
 }

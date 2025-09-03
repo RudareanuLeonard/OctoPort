@@ -12,7 +12,7 @@ ServerSocket::ServerSocket() {
 }
 
 void ServerSocket::create_tcp_server() {
-    int sockfd = socket(AF_INET, SOCK_STREAM, 0); // file descriptor; is int because is a number in the kernel table
+    int sockfd = socket(this->server_addr.sin_family, SOCK_STREAM, 0); // file descriptor; is int because is a number in the kernel table
     if (sockfd < 0) {
         std::cout << "Error creating socket\n";
         return;
@@ -43,7 +43,7 @@ void ServerSocket::create_tcp_server() {
     close(sockfd);
 }
 
-const sockaddr_in ServerSocket::get_server_addr(){
+const sockaddr_in& ServerSocket::get_server_addr(){
     return this->server_addr;
 }
 

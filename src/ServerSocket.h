@@ -12,7 +12,7 @@ public:
     ServerSocket();
     void create_tcp_server();
 
-    const sockaddr_in get_server_addr();
+    const sockaddr_in& get_server_addr();
 };
 
 #endif
