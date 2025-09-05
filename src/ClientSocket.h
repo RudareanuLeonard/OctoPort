@@ -6,19 +6,29 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <string>
 
-#include "ServerSocket.h"
+// #include "ServerSocket.h"
+
+class ServerSocket;
 
 class ClientSocket{
 
     private:
          sockaddr_in client_addr;
+         int client_sockfd;
         //  ServerSocket *server_socket;
 
     public:
         ClientSocket();
 
         void connect_to_server(ServerSocket *server_socket);
+
+        void send_message_to_server(ServerSocket *server_socket, int client_sockfd, std::string message);
+
+        int get_client_socket(){
+            return this->client_sockfd;
+        }
     
 };
 

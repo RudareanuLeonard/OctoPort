@@ -1,9 +1,14 @@
 #include "ServerSocket.h"
+#include "ClientSocket.h"
+
 #include <iostream>
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <unistd.h> // for close()
+
+
+
 
 ServerSocket::ServerSocket() {
     server_addr.sin_family = AF_INET;
@@ -11,7 +16,7 @@ ServerSocket::ServerSocket() {
     server_addr.sin_port = htons(8080);  // Use htons for correct byte order
 }
 
-void ServerSocket::create_tcp_server() {
+void ServerSocket::create_tcp_server(ClientSocket *client_socket) {
     int sockfd = socket(this->server_addr.sin_family, SOCK_STREAM, 0); // file descriptor; is int because is a number in the kernel table
     if (sockfd < 0) {
         std::cout << "Error creating socket\n";
@@ -35,6 +40,15 @@ void ServerSocket::create_tcp_server() {
     }
 
     std::cout << "Listening for connections...\n";
+
+    // char buffer[1024];
+
+    // int bytes_message_received = recv(client_socket->get_client_socket(), buffer, sizeof(buffer), 0);
+
+    // if(bytes_message_received > 0)
+    //     std::cout << "Message received " << buffer << "\n";
+    // else
+    //     std::cout << "Message is not received\n";
 
     // keeping the server alive
     while (true) {
