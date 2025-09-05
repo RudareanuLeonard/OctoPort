@@ -1,2 +1,2 @@
 # OctoPort
-PortHawk is a fast, multi-threaded C++ port scanner.
+OctoPort is a fast, multi-threaded C++ port scanner.
