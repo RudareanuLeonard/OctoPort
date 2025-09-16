@@ -24,10 +24,12 @@ class ClientSocket{
 
         void connect_to_server(ServerSocket *server_socket);
 
-        void send_message_to_server(ServerSocket *server_socket, int client_sockfd, std::string message);
+        void send_message_to_server(int client_sockfd, std::string message);
 
-        int get_client_socket(){
-            return this->client_sockfd;
+        int get_client_socket();
+
+        sockaddr_in& get_client_addr(){
+            return this->client_addr;
         }
     
 };

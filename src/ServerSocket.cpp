@@ -41,14 +41,23 @@ void ServerSocket::create_tcp_server(ClientSocket *client_socket) {
 
     std::cout << "Listening for connections...\n";
 
-    // char buffer[1024];
+    socklen_t client_len = sizeof(client_socket->get_client_addr());
+    sockaddr_in &addr = client_socket->get_client_addr();
 
-    // int bytes_message_received = recv(client_socket->get_client_socket(), buffer, sizeof(buffer), 0);
+    int accept_conn_socket = accept(sockfd, (sockaddr*)&addr, &client_len);
 
-    // if(bytes_message_received > 0)
-    //     std::cout << "Message received " << buffer << "\n";
-    // else
-    //     std::cout << "Message is not received\n";
+    if(accept_conn_socket < 0)
+        std::cout << "Error in accepting connections...\n";
+
+
+    char buffer[1024] = {0};
+    int bytes_message_received = recv(accept_conn_socket, buffer, sizeof(buffer), 0);
+
+    if(bytes_message_received > 0)
+        std::cout << "Message received: " << buffer << "\n";
+    else
+        std::cout << "Message not received\n";
+
 
     // keeping the server alive
     while (true) {
