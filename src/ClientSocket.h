@@ -28,9 +28,9 @@ class ClientSocket{
 
         int get_client_socket();
 
-        sockaddr_in& get_client_addr(){
-            return this->client_addr;
-        }
+        sockaddr_in& get_client_addr();
+
+        void trying_ports(ServerSocket *server_socket);
     
 };
 
